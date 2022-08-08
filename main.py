@@ -16,6 +16,19 @@ TOP = '	https://api.spotify.com/v1/me/top/'
 
 DEVICE_ID = Device().device()
 
+def help():
+	print('[get_current_track] to get live track updates to your currently playing')
+	print('[recent] to get information your recently played list\n\t(songs must be played for at least 30 seconds to be considered recently played)')
+	print('[top] to get your top listened to artists')
+	print('[saved] to get the total number and list of all artists that you have saved song for')
+	print('[next] go to the next audio in the queue')
+	print('[previous] go to the previous audio')
+	print('[pause] pause currently playing audio')
+	print('[play] play the currently paused audio')
+	print('[volume] to change the volume in the spotify application')
+	print('[search_artist] seach for an artist')
+	print('[search_song] search for a song')
+
 def get_current_track():
 	print('Ctr-C to get out of currently-playing\n')
 	current_track_id = None
@@ -201,12 +214,15 @@ def search_song():
 		print(f'SONG: {song} ARTIST: {artist} URI: {uri}')
 
 def main():
+	print('Enter HELP for controls')
 
 	while True:
 		user_input = input("Enter: ")
 		user_input = user_input.lower()
 
-		if user_input == 'next':
+		if user_input == 'help':
+			help()
+		elif user_input == 'next':
 			next()
 		elif user_input == 'previous':
 			previous()
@@ -228,6 +244,8 @@ def main():
 			search_artist()
 		elif user_input == 'search_song':
 			search_song()
+		else:
+			print('Invalid Entry. Try Again.\n')
 
 if __name__ == '__main__':
 	ACCESS_TOKEN = str(Refresh().refresh())
