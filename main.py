@@ -161,6 +161,45 @@ def volume():
 		}
 	)
 
+def search_artist():
+	cleaned = ''
+	user_input = input('Enter artist name: ')
+	for item in user_input.split(' '):
+		cleaned += (f'{item}%')
+	cleaned
+	response = requests.get(
+		f"https://api.spotify.com/v1/search?q=artist:{cleaned}&type=artist",
+		headers={
+			    "Authorization": f"Bearer {ACCESS_TOKEN}"
+			}
+		)
+	json_resp = response.json()
+	for item in json_resp['artists']['items']:
+		name = item['name']
+		popularity = item['popularity']
+		genre = item['genres']
+		followers = item['followers']['total']
+		print(f'NAME: {name} FOLLOWERS: {followers} GENRE: {genre} POPULARITY: {popularity}')
+
+def search_song():
+	cleaned = ''
+	user_input = input('Enter song name: ')
+	for item in user_input.split(' '):
+		cleaned += (f'{item}%')
+	cleaned
+	response = requests.get(
+		f"https://api.spotify.com/v1/search?q=track:{cleaned}&type=track",
+		headers={
+			    "Authorization": f"Bearer {ACCESS_TOKEN}"
+			}
+		)
+	json_resp = response.json()
+	for item in json_resp['tracks']['items']:
+		song = item['name']
+		artist = item['album']['artists'][0]['name']
+		uri = item['uri']
+		print(f'SONG: {song} ARTIST: {artist} URI: {uri}')
+
 def main():
 
 	while True:
@@ -185,6 +224,10 @@ def main():
 			top()
 		elif user_input == 'saved':
 			saved()
+		elif user_input == 'search_artist':
+			search_artist()
+		elif user_input == 'search_song':
+			search_song()
 
 if __name__ == '__main__':
 	ACCESS_TOKEN = str(Refresh().refresh())
