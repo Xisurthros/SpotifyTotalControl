@@ -31,3 +31,26 @@
 > - If you need extra help getting OAUTH set up for Spotiy check out this guide
 >   https://www.youtube.com/watch?v=-FsFT6OwE1A \
 >   From the start of the video to 15:15
+
+
+### Future Plans
+
+> Get album information\
+> Get artist information\
+> Get categories and category information\
+> Browse Category and Featured Playlists\
+> Get New Releases, Recommendations and Episodes\
+> Follow and Unfollow Artists, Users and Playlists\
+> Check what Artists, Users and Playlists that a user is following\
+> Save, Remove and Check Albums, Songs, Shows and Episodes\
+> Add item to Playback Queue\
+> Set Repeat Mode\
+> Seek to Position\
+> Toggle Playback Shuffle\
+> Transfer Playback\
+> Create playlist\
+> Get and Remove items from playlist\
+> Change playlist details\
+> Update Playlist Items\
+> Get Track Audio Analysis and Features\
+> Get Show Information
