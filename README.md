@@ -16,7 +16,7 @@
 > [play] play the currently paused audio.\
 > [volume] to change the volume in the Spotify application.\
 > [search_artist] seach for an artist.\
-> [search_song] search for a song.
+> [search_song] search for a song
 
 ### Requirements
 
