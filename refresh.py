@@ -2,7 +2,7 @@ from secrets import refresh_token, base_64
 import requests
 import json
 
-
+# Auto Refreshes Spotify OAUTH token
 class Refresh:
 
     def __init__(self):

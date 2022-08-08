@@ -1,8 +1,10 @@
-import requests, time
+import requests
 from pprint import pprint
-from device import Device
-from refresh import Refresh
+from device import Device # Checks which Device is currently being used by spotify
+from refresh import Refresh # Auto Refreshes Spotify OAUTH token
 from json.decoder import JSONDecodeError
+
+# URLS can be found throughout https://developer.spotify.com/console/
 
 SPOTIFY_GET_CURRENT_TRACK_URL = 'https://api.spotify.com/v1/me/player/currently-playing'
 NEXT_URL = 'https://api.spotify.com/v1/me/player/next'
@@ -14,7 +16,7 @@ SAVED_TRACKS = 'https://api.spotify.com/v1/me/tracks'
 VOLUME = 'https://api.spotify.com/v1/me/player/volume'
 TOP = '	https://api.spotify.com/v1/me/top/'
 
-DEVICE_ID = Device().device()
+DEVICE_ID = Device().device() # Checks which Device is currently being used by spotify
 
 def help():
 	print('[get_current_track] to get live track updates to your currently playing')
@@ -248,5 +250,5 @@ def main():
 			print('Invalid Entry. Try Again.\n')
 
 if __name__ == '__main__':
-	ACCESS_TOKEN = str(Refresh().refresh())
+	ACCESS_TOKEN = str(Refresh().refresh()) # Auto Refreshes Spotify OAUTH token
 	main()

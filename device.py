@@ -4,6 +4,7 @@ from refresh import Refresh
 
 ACCESS_TOKEN = str(Refresh().refresh())
 
+# Checks which Device is currently being used by spotify
 class Device:
 
 	def __init__(self):
