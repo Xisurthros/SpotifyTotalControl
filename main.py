@@ -2,6 +2,7 @@ import requests, time
 from pprint import pprint
 from device import Device
 from refresh import Refresh
+from json.decoder import JSONDecodeError
 
 SPOTIFY_GET_CURRENT_TRACK_URL = 'https://api.spotify.com/v1/me/player/currently-playing'
 NEXT_URL = 'https://api.spotify.com/v1/me/player/next'
@@ -51,6 +52,51 @@ def get_current_track():
 				current_track_id = current_track_info['id']
 		except KeyboardInterrupt:
 			break
+
+def recent():
+	songs = []
+	artists = []
+	x = 0
+
+	response = requests.get(
+			RECENT_TRACKS,
+			headers={
+			    "Authorization": f"Bearer {ACCESS_TOKEN}"
+			}
+		)
+	json_resp = response.json()
+	for item in json_resp['items']:
+		print(f"{item['track']['album']['artists'][0]['name']}: {item['track']['name']}")
+
+def top():
+	while True:
+		try:
+			user_input = input('Enter(artists, tracks): ')
+			user_input = user_input.lower()
+			response = requests.get(
+					TOP + f'{user_input.lower()}',
+					headers={
+					    "Authorization": f"Bearer {ACCESS_TOKEN}"
+					}
+				)
+			json_resp = response.json()
+			if user_input == 'artists':
+				for item in json_resp['items']:
+					artist = item['name']
+					followers = item['followers']['total']
+					genres = item['genres']
+					popularity = item['popularity']
+					print(f'NAME: {artist}\n     FOLLOWERS: {followers}\n     GENRES: {genres}\n     POPULARITY {popularity}')
+					break
+			elif user_input == 'tracks':
+				for item in json_resp['items']:
+					artist = item['artists'][0]['name']
+					song = item['name']
+					print(f'SONG: {song} | ARTIST: {artist}')
+					break
+
+		except JSONDecodeError:
+			print('Invalid Error\nTry again with (artists or tracks)')
 
 def next():
 	requests.post(
@@ -111,6 +157,10 @@ def main():
 			volume()
 		elif user_input == 'current':
 			get_current_track()
+		elif user_input == 'recent':
+			recent()
+		elif user_input == 'top':
+			top()
 
 if __name__ == '__main__':
 	ACCESS_TOKEN = str(Refresh().refresh())
