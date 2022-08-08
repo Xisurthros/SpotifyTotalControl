@@ -74,11 +74,11 @@ def top():
 			user_input = input('Enter(artists, tracks): ')
 			user_input = user_input.lower()
 			response = requests.get(
-					TOP + f'{user_input.lower()}',
-					headers={
-					    "Authorization": f"Bearer {ACCESS_TOKEN}"
-					}
-				)
+				TOP + f'{user_input.lower()}',
+				headers={
+				    "Authorization": f"Bearer {ACCESS_TOKEN}"
+				}
+			)
 			json_resp = response.json()
 			if user_input == 'artists':
 				for item in json_resp['items']:
@@ -94,9 +94,31 @@ def top():
 					song = item['name']
 					print(f'SONG: {song} | ARTIST: {artist}')
 					break
-
 		except JSONDecodeError:
 			print('Invalid Error\nTry again with (artists or tracks)')
+
+def saved():
+	artists = []
+	cleaned = []
+	x = 0
+	for i in range(50):
+		response = requests.get(
+				f'{SAVED_TRACKS}?limit=50&offset={x}',
+				headers={
+				    "Authorization": f"Bearer {ACCESS_TOKEN}"
+				}
+			)
+		json_resp = response.json()
+		for item in json_resp['items']:
+			artist = item['track']['album']['artists'][0]['name']
+			if artist in artists:
+				pass
+			else:
+				artists.append(artist)
+		x += 50
+
+	print(sorted(artists)[1:])
+	print(f'Total Artists: {len(artists)}')
 
 def next():
 	requests.post(
@@ -161,13 +183,9 @@ def main():
 			recent()
 		elif user_input == 'top':
 			top()
+		elif user_input == 'saved':
+			saved()
 
 if __name__ == '__main__':
 	ACCESS_TOKEN = str(Refresh().refresh())
 	main()
-
-
-
-
-#### git add but still need to commit
-#### issues with signing
