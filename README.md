@@ -2,19 +2,19 @@
 
 ### Entirely control your Spotify with python
 
-> Great for itergration into other projects
+> Great for integration into other projects
 
 ### Controls
 
-> [get_current_track] to get live track updates to your currently playing\
-> [recent] to get information your recently played list (songs must be played for at least 30 seconds to be considered recently played)\
+> [get_current_track] to get live track updates of your currently playing\
+> [recent] to get information of your recently played list (songs must be played for at least 30 seconds to be considered recently played)\
 > [top] to get your top listened to artists\
-> [saved] to get the total number and list of all artists that you have saved song for\
+> [saved] to get the total number and list of all artists that you have a saved song for\
 > [next] go to the next audio in the queue\
 > [previous] go to the previous audio\
 > [pause] pause currently playing audio\
 > [play] play the currently paused audio\
-> [volume] to change the volume in the spotify application\
+> [volume] to change the volume in the Spotify application\
 > [search_artist] seach for an artist\
 > [search_song] search for a song
 
