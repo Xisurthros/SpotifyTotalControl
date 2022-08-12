@@ -54,4 +54,5 @@
 > Change playlist details.\
 > Update playlist items.\
 > Get track audio analysis and features.\
-> Get show information.
+> Get show information.\
+> After getting all the additional features I plan to rewrite this entire thing using classes for ease of use sake.
