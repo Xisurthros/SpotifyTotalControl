@@ -15,6 +15,7 @@ RECENT_TRACKS = 'https://api.spotify.com/v1/me/player/recently-played'
 SAVED_TRACKS = 'https://api.spotify.com/v1/me/tracks'
 VOLUME = 'https://api.spotify.com/v1/me/player/volume'
 TOP = '	https://api.spotify.com/v1/me/top/'
+USER_PLAYLISTS = '	https://api.spotify.com/v1/me/playlists'
 
 DEVICE_ID = Device().device() # Checks which Device is currently being used by spotify
 
@@ -215,6 +216,34 @@ def search_song():
 		uri = item['uri']
 		print(f'SONG: {song} ARTIST: {artist} URI: {uri}')
 
+def my_playlists():
+	offset = 0
+	playlists = []
+	for num in range(4):
+		response = requests.get(
+			f'{USER_PLAYLISTS}?limit=50&offset={offset}',
+			headers={
+				    "Authorization": f"Bearer {ACCESS_TOKEN}"
+				}
+			)
+		offset+=50
+		json_resp = response.json()
+		for item in json_resp['items']:
+			playlist = {
+				'name': item['name'],
+				'owner': item['owner']['display_name'],
+				'description': item['description'],
+				'id': item['id'],
+				'track_amount': item['tracks']['total']
+			}
+			if playlist in playlists:
+				pass
+			else:
+				playlists.append(playlist)
+	for playlist in playlists:
+		print(f'Name: {playlist["name"]} | ID: {playlist["id"]}')
+	print(f'You have: {len(playlists)} playlists')
+
 def main():
 	print('Enter HELP for controls')
 
@@ -246,6 +275,8 @@ def main():
 			search_artist()
 		elif user_input == 'search_song':
 			search_song()
+		elif user_input == 'my_playlists':
+			my_playlists()
 		else:
 			print('Invalid Entry. Try Again.\n')
 
