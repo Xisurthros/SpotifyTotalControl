@@ -15,7 +15,7 @@ RECENT_TRACKS = 'https://api.spotify.com/v1/me/player/recently-played'
 SAVED_TRACKS = 'https://api.spotify.com/v1/me/tracks'
 VOLUME = 'https://api.spotify.com/v1/me/player/volume'
 TOP = '	https://api.spotify.com/v1/me/top/'
-USER_PLAYLISTS = '	https://api.spotify.com/v1/me/playlists'
+USER_PLAYLISTS = 'https://api.spotify.com/v1/me/playlists'
 
 DEVICE_ID = Device().device() # Checks which Device is currently being used by spotify
 
